@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Secure Broadcast</title>
+      <link rel="icon" href="favicon.ico" />
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
+      <link href="css/featherlight.min.css" rel="stylesheet" type="text/css" />
+      <link href="css/mobile.css" rel="stylesheet" type="text/css" />
+      <link href="css/desktop.css" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="https://use.typekit.net/wch2foa.css" />
+      <script src="https://kit.fontawesome.com/2e5c14c7aa.js" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"
+         ></script>
+      <script type="text/javascript" src="js/featherlight.min.js"></script>
+     
+     <script>
+         function frameInit() {
+            const url = window.location.href;
+            var urlParameters = url.substring(url.indexOf("?")+1);
+            const dataParametersString = url.substring(url.indexOf("#")+1);
+            var decodedData = decodeURIComponent(dataParametersString); 
+            var dataParameters = {
+  "name": "Johnson Rebekah",
+  "campus": "CE",
+  "long_campusdesc": "Coleraine",
+  "long_faculty_desc": "Life and Health Sciences",
+  "faculty_desc": "Faculty of Life and Health Scs",
+  "long_schooldesc": "School of Psychology",
+  "programme": "3834",
+  "prog_title": "BSc Hons Psychology FT",
+  "student_level": "UG",
+  "programme_year": "Y1"
+};
+
+
+            try {           
+               // Check if there is any data passed in via URL    
+               dataParameters = JSON.parse(decodedData);
+               // Strip data from URL before passing to iFrame
+               urlParameters = urlParameters.replace(dataParametersString, '') 
+            } catch (error) {
+               // Default to no data
+            }
+
+            // the data being passed into the post message is expecting 2 keys, urlParameters and localData
+            // urlParameters: String, can be an empty string
+            // localData must be a valid JSON object, {} for empty
+            var data = {"urlParameters": urlParameters, "localData":dataParameters}
+            document.getElementById('videoiFrame').contentWindow.postMessage(data, "*");
+
+         }
+      </script>   
+   </head>
+   <body>
+      <header>
+         <div class="header">
+            <div class="header-container">
+               <a href="www.securebroadcast.com" target="_blank">
+               <img
+                  src="assets/SBLogo.png"
+                  alt="Secure Broadcast Logo"
+                  class="logo"
+                  />
+               </a>
+            </div>
+         </div>
+      </header>
+      <!-- First Section with video -->
+      <section>
+         <div class="intro-container1">
+            <div class="row">
+               <div class="column">
+                  <div class="main-heading">
+                     Test <span class="goldText">VML</span> Host Page
+                  </div>
+                  <div class="main-text">
+                  Embedded iFrame Test Page for VML Videos
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section>
+         <div class="intro-container background-overlap">
+            <div class="video">
+               <div class="responsive-iframe">
+
+                  <!-- for running the iframe locally please uncomment the below line and replace your project ID -->
+                  <!-- <iframe onload="frameInit()" src="http://localhost:8080/client/index.html?id=0e2f6910-5f07-11eb-b0a7-d97e65526ad2" id="videoiFrame" frameborder="0" padding-left="20px" padding-right="20px" allowfullscreen></iframe> -->
+                  <!-- <iframe onload="frameInit()" src="https://player.vml.technology/v1/?id=bd701550-4076-11eb-8207-c1d8512464a1" id="videoiFrame" frameborder="0" padding-left="20px" padding-right="20px" allowfullscreen></iframe> -->
+                  <iframe onload="frameInit()" src="https://player.vml.technology/v1/uat/?id=7cb5d530-5f17-11eb-abef-0d009f797148" id="videoiFrame" frameborder="0" padding-left="20px" padding-right="20px" allowfullscreen></iframe>
+
+               </div>
+            </div>
+         </div>
+      </section>
+     
+   </body>
+</html>
